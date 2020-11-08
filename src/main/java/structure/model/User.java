@@ -10,18 +10,35 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @Column(name = "firstName")
     private String firstName;
-
-    @Column(name = "lastName")
     private String lastName;
+    private int age;
+    private int growth;
 
     public User(){}
 
-    public User(String firstName, String lastName){
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(User user) {
+        user.id = id;
+        user.firstName = firstName;
+        user.lastName = lastName;
+        user.age = age;
+        user.growth = growth;
+    }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getGrowth() {
+        return growth;
+    }
+
+    public void setGrowth(int growth) {
+        this.growth = growth;
     }
     public long getId() {
         return id;

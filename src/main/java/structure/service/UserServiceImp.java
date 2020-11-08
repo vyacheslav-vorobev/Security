@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import structure.dao.UserDaoImp;
 import structure.model.User;
-
-import java.beans.Transient;
 import java.util.List;
 
 @Service
@@ -30,5 +28,15 @@ public class UserServiceImp implements UserService {
     @Override
     public User getUser(long series){
         return userDao.getUser(series);
+    }
+    @Transactional
+    @Override
+    public void upDate(User user, long id) {
+        userDao.upDate(user,id);
+    }
+    @Transactional
+    @Override
+    public void remove(long id) {
+        userDao.remove(id);
     }
 }

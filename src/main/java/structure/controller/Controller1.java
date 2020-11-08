@@ -35,9 +35,17 @@ public class Controller1 {
     }
     @PostMapping()
     public String create(@ModelAttribute("user") User user){
-        System.out.println(user.getFirstName());
-        System.out.println(user.getLastName());
         userService.add(user);
+        return "redirect:/users";
+    }
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id")int id){
+        model.addAttribute("user",userService.getUser(id));
+        return "edit";
+    }
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id){
+        userService.upDate(user,id);
         return "redirect:/users";
     }
 }
