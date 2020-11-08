@@ -9,7 +9,7 @@ import structure.dao.UserDao;
 import structure.model.User;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/users")
 public class Controller1 {
 
     UserDao userDao;
@@ -18,11 +18,7 @@ public class Controller1 {
         this.userDao = userDao;
     }
 
-    @GetMapping("/")
-    public String priv(){
-        return "main";
-    }
-    @GetMapping("/users")
+    @GetMapping()
     public String viewsUsers(Model model){
         model.addAttribute("users", userDao.getAllUsers());
         return "allUsers";
@@ -32,7 +28,7 @@ public class Controller1 {
         model.addAttribute("user", userDao.getUser(id));
         return "user";
     }
-    @GetMapping("new")
+    @GetMapping("/new")
     public String newUser(Model model) {
         model.addAttribute("user", new User());
         return "new";
