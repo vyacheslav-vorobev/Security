@@ -1,31 +1,31 @@
 package structure.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import structure.dao.UserDao;
+import structure.dao.UserDaoImp;
 import structure.model.User;
+import structure.service.UserService;
 
 @Controller
 @RequestMapping("/users")
 public class Controller1 {
 
-    UserDao userDao;
+    UserService userService;
     @Autowired
-    public Controller1(UserDao userDao) {
-        this.userDao = userDao;
+    public Controller1(UserService userDao) {
+        this.userService = userDao;
     }
 
     @GetMapping()
     public String viewsUsers(Model model){
-        model.addAttribute("users", userDao.getAllUsers());
+        model.addAttribute("users", userService.listUsers());
         return "allUsers";
     }
     @GetMapping("/{id}")
     public String getOneUser(@PathVariable("id")Long id, Model model){
-        model.addAttribute("user", userDao.getUser(id));
+        model.addAttribute("user", userService.getUser(id));
         return "user";
     }
     @GetMapping("/new")
@@ -35,7 +35,9 @@ public class Controller1 {
     }
     @PostMapping()
     public String create(@ModelAttribute("user") User user){
-        userDao.saveUser(user);
+        System.out.println(user.getFirstName());
+        System.out.println(user.getLastName());
+        userService.add(user);
         return "redirect:/users";
     }
 }

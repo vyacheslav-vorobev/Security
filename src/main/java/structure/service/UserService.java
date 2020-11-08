@@ -1,11 +1,10 @@
-package structure.dao;
+package structure.service;
 
 import structure.model.User;
-
 import java.util.List;
 
-public interface UserDao {
+public interface UserService {
     void add(User user);
     List<User> listUsers();
-    public User getUser(long series);
+    User getUser(long series);
 }
