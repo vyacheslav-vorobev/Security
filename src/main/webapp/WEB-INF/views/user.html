@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <meta charset="UTF-8">
+    <title>user</title>
+</head>
+<body>
+<p th:text = "${user.getId()}"> </p>
+<p th:text = "${user.getFirstName()}"> </p>
+<p th:text = "${user.getLastName()}"> </p>
+<p th:text = "${user.getAge()}"> </p>
+
+<a th:href = "@{/users}" th:text =All_Users></a>
+</body>
+</html>

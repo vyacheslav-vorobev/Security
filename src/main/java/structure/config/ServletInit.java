@@ -10,7 +10,7 @@ public class ServletInit extends AbstractAnnotationConfigDispatcherServletInitia
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{SpringConfig.class};
+        return new Class[]{JavaConfig.class};
     }
 
     @Override
