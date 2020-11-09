@@ -9,9 +9,11 @@
 <p>All Users:</p>
 
 <div th:each ="user : ${users}">
-    <a th:href="@{users/{id}(id = ${user.getId()})}" th:text = "${user.getFirstName()}" > </a>
+    <a th:href="@{users/{id}(id = ${user.getId()})}" th:text = "${user.getFirstName()}" > user</a>
 </div>
+
 <br/>
+<hr/>
 
 <a th:href="@{/users/new}" th:text = new_User ></a>
 

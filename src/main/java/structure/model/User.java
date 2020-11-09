@@ -5,10 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 public class User {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    @GeneratedValue()
+    private int id;
 
     private String firstName;
     private String lastName;
@@ -18,11 +17,10 @@ public class User {
     public User(){}
 
     public User(User user) {
-        user.id = id;
-        user.firstName = firstName;
-        user.lastName = lastName;
-        user.age = age;
-        user.growth = growth;
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.age = user.getAge();
+        this.growth = user.getGrowth();
     }
 
     public int getAge() {
@@ -40,11 +38,11 @@ public class User {
     public void setGrowth(int growth) {
         this.growth = growth;
     }
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

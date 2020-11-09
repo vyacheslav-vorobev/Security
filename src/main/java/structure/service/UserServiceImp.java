@@ -26,17 +26,17 @@ public class UserServiceImp implements UserService {
     }
     @Transactional
     @Override
-    public User getUser(long series){
+    public User getUser(int series){
         return userDao.getUser(series);
     }
     @Transactional
     @Override
-    public void upDate(User user, long id) {
-        userDao.upDate(user,id);
+    public  void upDate(int id, User user) {
+        userDao.upDate(id,user);
     }
     @Transactional
     @Override
-    public void remove(long id) {
+    public void remove(int id) {
         userDao.remove(id);
     }
 }

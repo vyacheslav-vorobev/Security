@@ -1,12 +1,13 @@
 package structure.config;
 
+import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
-public class ServletInit extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class ServletInit extends AbstractAnnotationConfigDispatcherServletInitializer implements WebApplicationInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return null;

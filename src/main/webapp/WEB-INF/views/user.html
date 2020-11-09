@@ -4,12 +4,17 @@
     <title>user</title>
 </head>
 <body>
-<p th:text = "${user.getId()}"> </p>
+<p th:text = "${user.getId()}">ID</p>
 <p th:text = "${user.getFirstName()}"> </p>
 <p th:text = "${user.getLastName()}"> </p>
 <p th:text = "${user.getAge()}"> </p>
 <p th:text = "${user.getGrowth()}"> </p>
 <br/>
-<a th:href = "@{/users}" th:text =All_Users></a>
+<a th:href = "@{/users}" th:text =Show_all_users></a>
+<br/>
+<a th:href = "@{/users/{id}/delete(id=${user.getId()})}">DELETE</a>
+<br/>
+<a th:href = "@{/users/{id}/edit(id=${user.getId()})}" th:text =update></a>
+<br/>
 </body>
 </html>
