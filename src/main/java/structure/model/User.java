@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     private String firstName;
@@ -15,13 +15,6 @@ public class User {
     private int growth;
 
     public User(){}
-
-    public User(User user) {
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        this.age = user.getAge();
-        this.growth = user.getGrowth();
-    }
 
     public int getAge() {
         return age;

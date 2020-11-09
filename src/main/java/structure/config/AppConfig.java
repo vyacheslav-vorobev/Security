@@ -11,10 +11,8 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import structure.model.User;
-
 import javax.sql.DataSource;
 import java.util.Properties;
-
 
 @Configuration
 @PropertySource("classpath:/db.properties")
@@ -34,7 +32,6 @@ public class AppConfig {
         dataSource.setPassword(env.getProperty("db.password"));
         return dataSource;
     }
-
     @Bean
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
@@ -49,7 +46,6 @@ public class AppConfig {
         factoryBean.setAnnotatedClasses(User.class);
         return factoryBean;
     }
-
     @Bean
     public HibernateTransactionManager getTransactionManager() {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();

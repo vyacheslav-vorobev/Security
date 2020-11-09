@@ -2,8 +2,6 @@ package structure.dao;
 
 import org.springframework.stereotype.Repository;
 import structure.model.User;
-
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -28,17 +26,13 @@ public class UserDaoImp implements UserDao {
         return (User) entityManager.createQuery("FROM User where id = :Id")
                 .setParameter("Id", id).getSingleResult();
     }
-
     @Override
     public void remove(int id) {
         entityManager.createQuery("delete from User where id = :id")
                 .setParameter("id", id).executeUpdate();
     }
-
     @Override
     public void upDate(int id, User user) {
-       // this.remove(id);
         entityManager.merge(user);
-       // this.add(new User(user));
     }
 }

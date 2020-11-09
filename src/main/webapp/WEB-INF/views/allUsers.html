@@ -4,18 +4,23 @@
     <meta charset="UTF-8">
     <title>allUsers</title>
 </head>
-<body>
 
 <p>All Users:</p>
 
 <div th:each ="user : ${users}">
-    <a th:href="@{users/{id}(id = ${user.getId()})}" th:text = "${user.getFirstName()}" > user</a>
+    <body>
+    <a th:text ="${user.getId()}"></a>
+    &nbsp
+    <a th:href="@{users/{id}(id = ${user.getId()})}" th:text ="${user.getFirstName()}"></a>
+    <br/>
+    <a th:href = "@{/users/{id}/edit(id=${user.getId()})}">update</a>
+    &nbsp
+    <a th:href = "@{/users/{id}/delete(id=${user.getId()})}">delete</a>
+    <br/>
+    <br/>
+    </body>
 </div>
 
-<br/>
-<hr/>
+<a th:href="@{/users/new}">new user</a>
 
-<a th:href="@{/users/new}" th:text = new_User ></a>
-
-</body>
 </html>

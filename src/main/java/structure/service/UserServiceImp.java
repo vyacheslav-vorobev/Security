@@ -18,7 +18,6 @@ public class UserServiceImp implements UserService {
     public void add(User user) {
         userDao.add(user);
     }
-
     @Transactional(readOnly = true)
     @Override
     public List<User> listUsers() {
