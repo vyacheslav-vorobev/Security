@@ -12,7 +12,7 @@
 
     <a th:text ="${user.getId()}"></a>
     &nbsp
-    <a th:href="@{/{id}(id = ${user.getId()})}" th:text ="${user.getLogin()}"></a>
+    <a th:href="@{/user/{id}(id = ${user.getId()})}" th:text ="${user.getLogin()}"></a>
     <br/>
     <a th:href = "@{/admin/{id}/edit(id=${user.getId()})}">update</a>
     &nbsp

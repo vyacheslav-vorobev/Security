@@ -27,11 +27,7 @@ public class UserServiceImp implements UserService {
     @Transactional
     @Override
     public void addUser(User user) {
-//        user.setPassword(encoder.encode(user.getPassword()));
-//        Set<Role> roles = new HashSet<>();
-//        roles.add(roleDao.getOne(1L));
-//        user.setRoles(roles);
-//        userDao.add(user);
+        userDao.add(user);
     }
     @Transactional(readOnly = true)
     @Override
@@ -74,5 +70,12 @@ public class UserServiceImp implements UserService {
     @Override
     public User findByUserName(String login) {
         return userDao.getUserByLogin(login);
+    }
+    @Transactional
+
+    @Override
+    public Long getIdByLogin(String login) {
+        User user = userDao.getUserByLogin(login);
+        return user.getId();
     }
 }

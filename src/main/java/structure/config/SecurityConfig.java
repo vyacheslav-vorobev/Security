@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +20,7 @@ import structure.service.UserService;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
     private UserService userService;
     @Autowired
     public void setUserService(UserService userService) {
@@ -30,7 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
+        //auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
+        auth.userDetailsService(userDetailsService);
     }
 
     @Override
@@ -63,8 +65,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
+                .antMatchers("/user/**").authenticated()
                 // защищенные URL
                 .antMatchers("/admin/**").access("hasAnyRole('ADMIN')").anyRequest().authenticated();
+              //  .antMatchers("/user").access("hasAnyRole('USER_ROLE')").anyRequest().authenticated();
 
     }
 

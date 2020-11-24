@@ -13,4 +13,5 @@ public interface UserService /* extends UserDetailsService */{
     void remove(Long id);
     void upDate(Long id, User user);
     User findByUserName(String login);
+    Long getIdByLogin(String login);
 }

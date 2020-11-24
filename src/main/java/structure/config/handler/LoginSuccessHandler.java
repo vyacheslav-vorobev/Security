@@ -1,9 +1,12 @@
 package structure.config.handler;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import structure.model.User;
+import structure.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +16,9 @@ import java.util.Set;
 
 @Component
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,

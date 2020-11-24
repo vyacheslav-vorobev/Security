@@ -1,15 +1,25 @@
 package structure.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import structure.dao.RoleDao;
+import structure.model.Role;
 import structure.model.User;
 import structure.service.UserService;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Controller
 public class Controller1 {
+    @Autowired
+    private PasswordEncoder encoder;
+    @Autowired
+    private RoleDao roleDao;
 
     UserService userService;
 
@@ -23,7 +33,7 @@ public class Controller1 {
         model.addAttribute("users", userService.listUsers());
         return "allUsers";
     }
-    @GetMapping("/{id}")
+    @GetMapping("user/{id}")
     public String getOneUser(@PathVariable("id")Long id, Model model){
         model.addAttribute("user", userService.getUser(id));
         return "user";
@@ -33,9 +43,20 @@ public class Controller1 {
         model.addAttribute("user", new User());
         return "new";
     }
+//    @PostMapping("/admin/new")
+//    public String create(@ModelAttribute("user") User user){
+//        System.out.println("зашёл в create");
+//        userService.addUser(user);
+//        return "redirect:/admin";
+//    }
     @PostMapping("/admin/new")
-    public String create(@ModelAttribute("user") User user){
-        System.out.println("зашёл в create");
+    public String create(@ModelAttribute("login") String login, @ModelAttribute("password") String password){
+        User user = new User();
+        user.setLogin(login);
+        user.setPassword(encoder.encode(password));
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleDao.getOne(2L));
+        user.setRoles(roles);
         userService.addUser(user);
         return "redirect:/admin";
     }
