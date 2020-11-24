@@ -22,17 +22,22 @@ public class UserDaoImp implements UserDao {
         return entityManager.createQuery("from User").getResultList();
     }
     @Override
-    public User getUser(int id) {
+    public User getUser(Long id) {
         return (User) entityManager.createQuery("FROM User where id = :Id")
                 .setParameter("Id", id).getSingleResult();
     }
     @Override
-    public void remove(int id) {
+    public User getUserByLogin(String login) {
+        return (User) entityManager.createQuery("FROM User where login = :login")
+                .setParameter("login", login).getSingleResult();
+    }
+    @Override
+    public void remove(Long id) {
         entityManager.createQuery("delete from User where id = :id")
                 .setParameter("id", id).executeUpdate();
     }
     @Override
-    public void upDate(int id, User user) {
+    public void upDate(Long id, User user) {
         entityManager.merge(user);
     }
 }

@@ -51,10 +51,25 @@ public class JavaConfig implements WebMvcConfigurer {
         resolver.setSuffix(".html");
         return resolver;
     }
+
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry){
-        registry
-                .addResourceHandler("/resources/**")
-                .addResourceLocations("/resources/");
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/news").setViewName("news");
     }
+
+    //    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/pages/**").addResourceLocations("/pages/");
+//    }
+//
+//    @Bean
+//    public UrlBasedViewResolver setupViewResolver() {
+//        UrlBasedViewResolver resolver = new UrlBasedViewResolver();
+//        resolver.setPrefix("/WEB-INF/views/");
+//        resolver.setSuffix(".html");
+//        resolver.setViewClass(JstlView.class);
+//
+//        return resolver;
+//    }
 }

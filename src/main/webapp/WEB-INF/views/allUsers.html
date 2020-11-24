@@ -9,18 +9,19 @@
 
 <div th:each ="user : ${users}">
     <body>
+
     <a th:text ="${user.getId()}"></a>
     &nbsp
-    <a th:href="@{users/{id}(id = ${user.getId()})}" th:text ="${user.getFirstName()}"></a>
+    <a th:href="@{/{id}(id = ${user.getId()})}" th:text ="${user.getLogin()}"></a>
     <br/>
-    <a th:href = "@{/users/{id}/edit(id=${user.getId()})}">update</a>
+    <a th:href = "@{/admin/{id}/edit(id=${user.getId()})}">update</a>
     &nbsp
-    <a th:href = "@{/users/{id}/delete(id=${user.getId()})}">delete</a>
+    <a th:href = "@{/admin/{id}/delete(id=${user.getId()})}">delete</a>
     <br/>
     <br/>
     </body>
 </div>
 
-<a th:href="@{/users/new}">new user</a>
+<a th:href="@{/admin/new}">Add new user</a>
 
 </html>

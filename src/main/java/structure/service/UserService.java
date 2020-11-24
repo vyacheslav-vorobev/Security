@@ -1,12 +1,16 @@
 package structure.service;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Service;
 import structure.model.User;
 import java.util.List;
 
-public interface UserService {
-    void add(User user);
+@Service
+public interface UserService /* extends UserDetailsService */{
+    void addUser(User user);
     List<User> listUsers();
-    User getUser(int series);
-    void remove(int id);
-    void upDate(int id, User user);
+    User getUser(Long series);
+    void remove(Long id);
+    void upDate(Long id, User user);
+    User findByUserName(String login);
 }
