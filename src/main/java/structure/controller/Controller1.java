@@ -1,6 +1,7 @@
 package structure.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,31 +10,32 @@ import structure.dao.RoleDao;
 import structure.model.Role;
 import structure.model.User;
 import structure.service.UserService;
-
 import java.util.HashSet;
 import java.util.Set;
 
-
+@RequestMapping()
 @Controller
 public class Controller1 {
+
     @Autowired
     private PasswordEncoder encoder;
     @Autowired
     private RoleDao roleDao;
 
-    UserService userService;
-
     @Autowired
-    public Controller1(UserService userService) {
-        this.userService = userService;
+    UserService userService;
+    @GetMapping("/user")
+    public String getUser(Authentication authentication, Model model){
+        User user = userService.findByUserName(authentication.getName());
+        model.addAttribute("user",user);
+        return "user";
     }
-
     @GetMapping("/admin")
     public String viewsUsers(Model model){
         model.addAttribute("users", userService.listUsers());
         return "allUsers";
     }
-    @GetMapping("user/{id}")
+    @GetMapping("/admin/{id}")
     public String getOneUser(@PathVariable("id")Long id, Model model){
         model.addAttribute("user", userService.getUser(id));
         return "user";
@@ -43,20 +45,20 @@ public class Controller1 {
         model.addAttribute("user", new User());
         return "new";
     }
-//    @PostMapping("/admin/new")
-//    public String create(@ModelAttribute("user") User user){
-//        System.out.println("зашёл в create");
-//        userService.addUser(user);
-//        return "redirect:/admin";
-//    }
     @PostMapping("/admin/new")
-    public String create(@ModelAttribute("login") String login, @ModelAttribute("password") String password){
+    public String create(@ModelAttribute("login") String login, @ModelAttribute("password") String password,
+                         @ModelAttribute("firstName") String firstName, @ModelAttribute("lastName") String lastName,
+                         @ModelAttribute("age") int age, @ModelAttribute("growth") int growth){
         User user = new User();
         user.setLogin(login);
         user.setPassword(encoder.encode(password));
         Set<Role> roles = new HashSet<>();
         roles.add(roleDao.getOne(2L));
         user.setRoles(roles);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setAge(age);
+        user.setGrowth(growth);
         userService.addUser(user);
         return "redirect:/admin";
     }
@@ -77,10 +79,6 @@ public class Controller1 {
         System.out.println("Зашёл в DELETE");
         userService.remove(id);
         return "redirect:/admin";
-    }
-    @GetMapping("/login")
-    public String login(Model model){
-        return "login";
     }
 }
 

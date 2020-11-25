@@ -1,12 +1,15 @@
 package structure.service;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
+import structure.model.Role;
 import structure.model.User;
+
+import java.util.Collection;
 import java.util.List;
 
 @Service
-public interface UserService /* extends UserDetailsService */{
+public interface UserService {
     void addUser(User user);
     List<User> listUsers();
     User getUser(Long series);

@@ -22,13 +22,8 @@
     <br>
     Growth:
     <a th:text = "${user.getGrowth()}"> </a>
-
     <br/>
-    <a th:href = "@{/users/{id}/delete(id=${user.getId()})}">delete</a>
     <br/>
-    <a th:href = "@{/users/{id}/edit(id=${user.getId()})}" th:text =update></a>
-    <br/>
-    <a th:href = "@{/users}">show all users</a>
-    <br/>
+    <a th:href = "@{/logout}">Logout</a>
 </body>
 </html>

@@ -16,25 +16,17 @@ public class User implements UserDetails {
 
     @Column(name = "username")
     private String login;
-
     @Column (name = "password")
     private String password;
-
     private String firstName;
     private String lastName;
     private int age;
     private int growth;
-    @ManyToMany
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
-
-//    @OneToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id")
-//            , inverseJoinColumns = @JoinColumn(name = "role_id"))
-//    private Collection<Role> roles;
-
-//     @Column(name = "login", nullable = false, unique = true)
 
     public User(){}
 
